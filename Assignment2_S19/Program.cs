@@ -113,7 +113,7 @@ namespace Assignment2_S19
             } // end catch
             // return empty array as default
             return new int[] {};
-        }
+        } // end rotLeft
 
         //// Complete the maximumToys function below.
         //static int maximumToys(int[] prices, int k)
@@ -152,30 +152,27 @@ namespace Assignment2_S19
                     // Can I use this funtion ?????
                     //Array.Sort(arr);
 
-                    // middle element in the sorted array
+                    // declare mid as middle element in the sorted array
                     int mid;
-                    // min_position is used to keep track of the element position with the current lowest value
-                    int min_position;
-                    // temp is used to conduct the swap during during the Selection Sort Algorithm
-                    int temp;
+                    // declare min_position , temp
+                    int min_position, temp;
 
                     for (int i = 0; i < arr.Length; i++)
                     {
-                        // Here we initialize the min_position to the current index of array
+                        // initialize the min_position to the current index of array
                         min_position = i;
-                        // From the min_position, check to see if the next element is smaller
+                        // check to see if the next element is smaller
                         for (int x = i + 1; x < arr.Length; x++)
                         {
-                            // If the next element from the current min_position is smaller, then make that the new min_position
+                            // If the next element from the current min_position is smaller
                             if (arr[x] < arr[min_position])
                             {
-                                //min_position will keep track of the index that min is in, this is needed when a swap happens
+                                //assign new min_position 
                                 min_position = x;
                             }
                         } // End of inner for loop
 
-                        // If the min_position does not equal the current element being evaluated in the loop
-                        // Then execute the swap. by switching the postion of the lowest with the current element
+                        // If the min_position does not equal the current element, swap
                         if (min_position != i)
                         {
                             temp = arr[i];
@@ -184,6 +181,7 @@ namespace Assignment2_S19
                         }
                     } // End of outer for loop
 
+                    // array is already sorted up to here 
                     // return middle element in the sorted array as result 
                     return mid = arr[arr.Length / 2];
                 }
@@ -200,7 +198,7 @@ namespace Assignment2_S19
 
             // return 0 as defult 
             return 0;
-        }
+        } // end findMedian
 
         //// Complete the closestNumbers function below.
         //static int[] closestNumbers(int[] arr)
