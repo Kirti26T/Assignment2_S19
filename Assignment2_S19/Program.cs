@@ -9,7 +9,6 @@
 ------------------------------------------------------------------------------------
 */
 
-
 using System;
 using System.Collections.Generic;
 
@@ -54,18 +53,19 @@ namespace Assignment2_S19
             Console.WriteLine("\n\nFind the median");
             int[] arr2 = { 0, 1, 2, 4, 6, 5, 3, 8, 7};
             Console.WriteLine(findMedian(arr2));
-            Console.ReadLine();
-
-            //// closest numbers
-            //Console.WriteLine("\n\nClosest numbers");
+            
+            // closest numbers
+            Console.WriteLine("\n\nClosest numbers");
+            int[] arr3 = { -20, -3916237, -357920, -3620601, 7374819, -7330761, 30, 6246457, -6461594, 266854, -520, -470 };
             //int[] arr3 = { 5, 4, 3, 2 };
-            //int[] r4 = closestNumbers(arr3);
-            //displayArray(r4);
+            int[] r4 = closestNumbers(arr3);
+            displayArray(r4);
 
-            //// Day of programmer
-            //Console.WriteLine("\n\nDay of Programmer");
-            //int year = 2017;
-            //Console.WriteLine(dayOfProgrammer(year));
+            // Day of programmer
+            Console.WriteLine("\n\nDay of Programmer");
+            int year = 2016;
+            Console.WriteLine(dayOfProgrammer(year));
+            Console.ReadLine();
 
         }
 
@@ -148,10 +148,7 @@ namespace Assignment2_S19
                 // check for valid input 
                 if (arr.Length > 0)
                 {
-                    // First : need to sort array 
-                    // Can I use this funtion ?????
-                    //Array.Sort(arr);
-
+                    /*--------------Step 1: sort array -----------------*/
                     // declare mid as middle element in the sorted array
                     int mid;
                     // declare min_position , temp
@@ -182,6 +179,8 @@ namespace Assignment2_S19
                     } // End of outer for loop
 
                     // array is already sorted up to here 
+
+                    /*--------------Step 2: find the middle element in the sorted array -----------------*/
                     // return middle element in the sorted array as result 
                     return mid = arr[arr.Length / 2];
                 }
@@ -200,16 +199,173 @@ namespace Assignment2_S19
             return 0;
         } // end findMedian
 
-        //// Complete the closestNumbers function below.
-        //static int[] closestNumbers(int[] arr)
-        //{
-        //    return new int[] { };
-        //}
+        //Complete the closestNumbers function below.
+        static int[] closestNumbers(int[] arr)
+        {
+            try
+            {
+                if (arr.Length > 0)
+                {
+                    /*--------------Step 1: sort array -----------------*/
+                    // declare min_position , temp
+                    int min_position, temp;
 
-        //// Complete the dayOfProgrammer function below.
-        //static string dayOfProgrammer(int year)
-        //{
-        //    return "";
-        //}
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        // initialize the min_position to the current index of array
+                        min_position = i;
+                        // check to see if the next element is smaller
+                        for (int x = i + 1; x < arr.Length; x++)
+                        {
+                            // If the next element from the current min_position is smaller
+                            if (arr[x] < arr[min_position])
+                            {
+                                //assign new min_position 
+                                min_position = x;
+                            }
+                        } // End of inner for loop
+
+                        // If the min_position does not equal the current element, swap
+                        if (min_position != i)
+                        {
+                            temp = arr[i];
+                            arr[i] = arr[min_position];
+                            arr[min_position] = temp;
+                        }
+                    } // End of outer for loop
+
+                    // array is already sorted up to here 
+
+                    /*--------------Step 2: find the closest numbers-----------------*/
+                    // declare a list to hold result sets
+                    var result = new List<int> { };
+                    // initialize minDiff by substrating index element 0 from 1 in the array
+                    int minDiff = arr[1] - arr[0];
+                  // start a loop from index element 2 to find  differences of adjacent  pairs to find the minimum difference
+                    for (int i = 2; i < arr.Length; i++)
+                    {
+                        if (arr[i] - arr[i - 1] < minDiff)
+                        {
+                            // assign new value if minDiff if there is
+                            minDiff = arr[i] - arr[i - 1];
+                        }
+                    }
+                    // Loop through array and check for minimum difference equal to minDiff
+                    for (int j = 0; j < arr.Length - 1; j++)
+                    {
+                        // if adjacent  pairs equal to minDiff , add that pair to the result list
+                        if (arr[j + 1] - arr[j] == minDiff)
+                        {
+                            result.Add(arr[j]);
+                            result.Add(arr[j + 1]);
+                        }
+                    }
+                    // return result list as an array
+                    return result.ToArray();
+                } // end if
+                else
+                {
+                    Console.WriteLine("Please provide a valid input ! ");
+                } // end else
+            } // end try
+            // catch bad input
+            catch
+            {
+                Console.WriteLine("Exception occured while computing closestNumbers() !");
+            } // end catch
+
+            // return emty array as default
+            return new int[] { };
+        } //closestNumbers
+
+        // Complete the dayOfProgrammer function below.
+        static string dayOfProgrammer(int year)
+        {
+            try
+            {
+                // Check for valid input, if input is valid, apply logic
+                if (year >= 1700 && year <= 2700)
+                {
+                    // initialize the 256th day of programer
+                    int dayToFind = 256;
+                    // initialize array arrDays to hold days in 12 months
+                    int[] arrDays = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+                   //Use Gregorian calendar
+                    if (year >= 1919 && year <= 2700)
+                    {
+                        // leap year if divisible by 400, or divisible by 4 but not 100
+                        if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0))
+                        {
+                            arrDays[1] = 29;
+                        }
+                    }
+                    //Use Julian calendar
+                    else if (year >= 1700 && year <= 1917)
+                    {
+                        //leap year if divisible by 4
+                        if (year % 4 == 0)
+                        {
+                            arrDays[1] = 29;
+                        }
+                   }
+                   // 1918 : special year with Feb has 15 days (29 - 14 = 15)
+                    else
+                    {
+                        arrDays[1] = 15;
+                    }
+                    //sum of the days in each month  
+                    int sumDays = 0;
+                    //keep memory of which month we are in, not 0 indexing
+                    int currMonth = 0;
+                   // Initialize day & month for storing result
+                    String day = "";
+                    String month = "";
+
+                    for (int i = 0; i < arrDays.Length; i++)
+                    {
+                        //Add sumDays with this currtMonth
+                        sumDays += arrDays[i];
+                        currMonth += 1;
+                        //If dayToFind exceed, so it is the month .
+                        if (sumDays > dayToFind)
+                        {
+                            break;
+                        }
+                    }
+                   //subtract to get the result, with an offset of 1
+                    int dayOfMonth = (arrDays[currMonth] - (sumDays - dayToFind)) - 1;
+                    // Format Day
+                    if (dayOfMonth < 10)
+                    {
+                        day = "0" + dayOfMonth.ToString();
+                    }
+                    else
+                    {
+                        day = dayOfMonth.ToString();
+                    }
+                    // Format Month
+                    if (currMonth < 10)
+                    {
+                        month = "0" + currMonth.ToString();
+                    }
+                    else
+                    {
+                        month = currMonth.ToString();
+                    }
+                   // return result in DD.MM.YYYY format
+                    return day + "." + month + "." + year;
+                } // end if
+                // display error message if input is invalid
+                else
+                {
+                    Console.WriteLine("Please enter a valid year beetwem 1700 and 2700 !!!");
+                } // end else
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing closestNumbers() !");
+            } // end catch
+            return "";
+        } // end dayOfProgrammer
     }
 }
