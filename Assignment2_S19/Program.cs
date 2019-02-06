@@ -24,13 +24,13 @@ namespace Assignment2_S19
             int[] a = { 1, 2, 3, 10, 5, 6, 7 };
             int[] r = rotLeft(a, d);
             displayArray(r);
-            /*
+            
             // Maximum toys
             Console.WriteLine("\n\nMaximum toys");
             int k = 50;
             int[] prices = { 1, 12, 5, 111, 200, 1000, 10 };
             Console.WriteLine(maximumToys(prices, k));
-
+            /*
             // Balanced sums
             Console.WriteLine("\n\nBalanced sums");
             List<int> arr = new List<int> { 1, 2, 3 };
@@ -116,10 +116,60 @@ namespace Assignment2_S19
         } // end rotLeft
 
         //// Complete the maximumToys function below.
-        //static int maximumToys(int[] prices, int k)
-        //{
-        //    return 0;
-        //}
+        static int maximumToys(int[] prices, int k)
+        {
+            try
+            {
+                //printing the original array
+                Console.WriteLine("Here is the array that will be used to execute bubble sort algorithm:");
+                for (int i = 0; i < prices.Length; i++)
+                {
+                    Console.Write(" " + prices[i]);
+                }
+                Console.WriteLine(" ");
+                Console.WriteLine("Here is the array after the execution of bubble sort algoritm:");
+                //calling the method for sorting
+                bubblesort(prices);
+                //printing the array after bubble sort
+                for (int i = 0; i < prices.Length; i++)
+                {
+                    Console.Write(" " + prices[i]);
+                }
+                Console.WriteLine(" ");
+                int count = 0;
+                for (int i = 0; i < prices.Length; i++)
+                {
+                    if (prices[i] <= k)
+                    {
+                        k -= prices[i];
+                        count++;
+                    }
+                    
+                }
+                Console.WriteLine("The maximum toys that can be bought are:");
+                return count;
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while executing maximumtoys() ! ");
+            } // end catch
+            return 0;
+        }
+        static void bubblesort(int[] bs_arr)
+        {
+            for (int i = 0; i < bs_arr.Length - 1; i++)
+            {
+                for (int j = 0; j < bs_arr.Length - i - 1; j++)
+                {
+                    if (bs_arr[j] > bs_arr[j + 1])
+                    {
+                        int temp = bs_arr[j];
+                        bs_arr[j] = bs_arr[j + 1];
+                        bs_arr[j + 1] = temp;
+                    }
+                }
+            }
+        }
 
         //// Complete the balancedSums function below.
         //static string balancedSums(List<int> arr)
