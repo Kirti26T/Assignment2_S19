@@ -42,13 +42,13 @@ namespace Assignment2_S19
             int[] brr = { 203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204 };
             int[] r2 = missingNumbers(arr1, brr);
             displayArray(r2);
-
+            */
             // grading students
             Console.WriteLine("\n\nGrading students");
             int[] grades = { 73, 67, 38, 33 };
             int[] r3 = gradingStudents(grades);
             displayArray(r3);
-            */
+            
             // find the median
             Console.WriteLine("\n\nFind the median");
             int[] arr2 = { 0, 1, 2, 4, 6, 5, 3, 8, 7};
@@ -69,9 +69,11 @@ namespace Assignment2_S19
 
         }
 
-        static void displayArray(int []arr) {
+        static void displayArray(int []arr)
+        {
             Console.WriteLine();
-            foreach(int n in arr) {
+            foreach(int n in arr)
+            {
                 Console.Write(n + " ");
             }
         }
@@ -136,18 +138,25 @@ namespace Assignment2_S19
                     Console.Write(" " + prices[i]);
                 }
                 Console.WriteLine(" ");
-                int count = 0;
-                for (int i = 0; i < prices.Length; i++)
+                if (k > 0)
                 {
-                    if (prices[i] <= k)
+                    int count = 0;
+                    for (int i = 0; i < prices.Length; i++)
                     {
-                        k -= prices[i];
-                        count++;
+                        if (prices[i] <= k)
+                        {
+                            k -= prices[i];
+                            count++;
+                        }
+
                     }
-                    
+                    Console.WriteLine("The maximum toys that can be bought are:");
+                    return count;
                 }
-                Console.WriteLine("The maximum toys that can be bought are:");
-                return count;
+                else
+                {
+                    Console.WriteLine("Please enter a appropriate value for money");
+                }
             }
             catch
             {
@@ -185,10 +194,27 @@ namespace Assignment2_S19
 
 
         //// Complete the gradingStudents function below.
-        //static int[] gradingStudents(int[] grades)
-        //{
-        //    return new int[] { };
-        //}
+        static int[] gradingStudents(int[] grades)
+        {
+            try
+            {
+                
+               for (int j = 0; j < grades.Length; j++)
+               {
+                    if (grades[j] >= 38 && grades[j] % 5 > 2)
+                    {
+                          grades[j] += 5 - grades[j] % 5;
+                    }
+           
+               }
+               return grades;     
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing grades");
+            }
+            return new int[] { };
+        }
 
         // Complete the findMedian function below.
         static int findMedian(int[] arr)
