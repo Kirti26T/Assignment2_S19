@@ -30,19 +30,48 @@ namespace Assignment2_S19
             int k = 50;
             int[] prices = { 1, 12, 5, 111, 200, 1000, 10 };
             Console.WriteLine(maximumToys(prices, k));
-            /*
             // Balanced sums
             Console.WriteLine("\n\nBalanced sums");
-            List<int> arr = new List<int> { 1, 2, 3 };
-            Console.WriteLine(balancedSums(arr));
+            //List<int> arr = new List<int> { 1, 2, 2, 3 };
+            List<int> arr = new List<int>();
+            try
+            {
+                // Allow user to provide the size of array
+                Console.WriteLine("Enter Size of Array");
+                int size = Convert.ToInt32(Console.ReadLine());
+                int[] arry = new int[size];
+                // Allow user to input numbers for the array based on the given size
+                Console.WriteLine("Input Array Values");
+                for (int i = 0; i < arry.Length; i++)
+                {
+                    arry[i] = Convert.ToInt32(Console.ReadLine());
+
+                }
+                Console.WriteLine("arr = [" + string.Join(",", arry) + "]");
+                arr.AddRange(arry);
+                Console.WriteLine(balancedSums(arr));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception occured while computing computeFrequency():" + e.Message);
+            }
 
             // Missing numbers
             Console.WriteLine("\n\nMissing numbers");
             int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206 };
             int[] brr = { 203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204 };
+            // Ask user to enter size of the array brr
+            Console.WriteLine("Enter Size of Array brr");
+            int brr_size = Convert.ToInt32(Console.ReadLine());
+            brr = new int[brr_size];
+            // Ask user to enter size of the array arr
+            Console.WriteLine("Enter Size of Array arr");
+            int arr_size = Convert.ToInt32(Console.ReadLine());
+            arr1 = new int[arr_size];
+
             int[] r2 = missingNumbers(arr1, brr);
+
             displayArray(r2);
-            */
             // grading students
             Console.WriteLine("\n\nGrading students");
             int[] grades = { 73, 67, 38, 33 };
@@ -75,6 +104,22 @@ namespace Assignment2_S19
             foreach(int n in arr)
             {
                 Console.Write(n + " ");
+            }
+        }
+        // bubblesort method to sort the arrays
+        static void bubblesort(int[] bs_arr)
+        {
+            for (int i = 0; i < bs_arr.Length - 1; i++)
+            {
+                for (int j = 0; j < bs_arr.Length - i - 1; j++)
+                {
+                    if (bs_arr[j] > bs_arr[j + 1])
+                    {
+                        int temp = bs_arr[j];
+                        bs_arr[j] = bs_arr[j + 1];
+                        bs_arr[j + 1] = temp;
+                    }
+                }
             }
         }
 
@@ -164,33 +209,182 @@ namespace Assignment2_S19
             } // end catch
             return 0;
         }
-        static void bubblesort(int[] bs_arr)
+        
+
+        // Complete the balancedSums function below.
+        static string balancedSums(List<int> arr)
         {
-            for (int i = 0; i < bs_arr.Length - 1; i++)
+
+            int count = 0;
+            int n = arr.Count - 1;
             {
-                for (int j = 0; j < bs_arr.Length - i - 1; j++)
+                if (n >= 1)
                 {
-                    if (bs_arr[j] > bs_arr[j + 1])
+                    for (int i = 0; i <= n; i++)
                     {
-                        int temp = bs_arr[j];
-                        bs_arr[j] = bs_arr[j + 1];
-                        bs_arr[j + 1] = temp;
+
+                        int sum1 = 0;
+                        int sum2 = 0;
+                        // Based on the index get the sum of the left elemnts of the array
+                        for (int j = 0; j < i; j++)
+                        {
+                            sum1 += arr[j];
+
+                        }//end of for loop to calculate sum of left elements
+                        // Based on the index get the sum of the right elemnts of the array
+                        for (int k = i + 1; k <= n; k++)
+                        {
+                            sum2 += arr[k];
+
+                        }//end of for loop to calculate sum of right elements
+                         // Compare sum of both the sides derived above
+                        if (sum1 == sum2)
+                        {
+                            count++; // Increment count by 1 if the sum matches
+                        }
+                    }//end of for loop for which calculates sum and compares
+                    // If count >0 then return "YES" else "NO" to show if the element is found or not.
+                    if (count != 0)
+                    {
+                        return "YES";
+                    }
+                    else
+                    {
+                        return "NO";
                     }
                 }
-            }
+
+                else
+                {
+                    Console.WriteLine("Enter more than one element in the array");
+
+                }
+                return "";
+
+            }//end of if which checks elements in array
+
+
         }
 
-        //// Complete the balancedSums function below.
-        //static string balancedSums(List<int> arr)
-        //{
-        //    return "";
-        //}
+        // Complete the missingNumbers function below.
+        static int[] missingNumbers(int[] arr, int[] brr)
+        {
+            try
+            {
+                // Allow user to input numbers for the array brr based on the given size
+                Console.WriteLine("Input Array Values");
+                for (int b = 0; b < brr.Length; b++)
+                {
+                    brr[b] = Convert.ToInt32(Console.ReadLine());
 
-        //// Complete the missingNumbers function below.
-        //static int[] missingNumbers(int[] arr, int[] brr)
-        //{
-        //    return new int[] { };
-        //}
+                }
+                Console.WriteLine("brr = {" + string.Join(",", brr) + "}");
+                bubblesort(brr);// Sort array brr by calling bubble sort method
+                int b_len = brr.Length; //get length of the array brr
+                                        // check difference between maximum and minimum numbers of the array
+                int minnum = brr[0];
+                int maxnum = brr[b_len - 1];
+                int Diff = maxnum - minnum;
+                //Console.WriteLine("Diff is :" + Diff);
+                // if the difference between max and min numbers of the array is < 101 then execute below statements
+                if (Diff < 101)
+                {
+
+                    //Allow user to input numbers for the array arr based on the given size
+                    Console.WriteLine("Input Array Values");
+                    for (int a = 0; a < arr.Length; a++)
+                    {
+                        arr[a] = Convert.ToInt32(Console.ReadLine());
+
+                    }
+                    Console.WriteLine("arr = {" + string.Join(",", arr) + "}");
+                    bubblesort(arr);// Sort array arr by calling bubble sort method
+
+                    int a_len = arr.Length;// get length of array arr
+                    List<int> numbers = new List<int>(); // create list for storing indexes for the numbers which are available in arr and brr
+                    List<int> unq_num = new List<int>(); // create list for storing unique number
+                    int[] missing_num = new int[b_len - a_len]; // array to store missing numbers
+
+                    int counter = 0;
+
+
+                    for (int i = 0; i < b_len; i++)// start of i loop for brr
+                    {
+
+                        int j; int index = 1;// set index to 1
+                        int flag = 0;
+                        for (j = 0; j < a_len; j++) // start of j loop for arr
+                        {
+                            if (!numbers.Contains(index)) // check if index of the number from array brr is already in the list
+                            {
+                                if (brr[i] == arr[j]) // check if element is present in both the arrays 
+                                {
+                                    numbers.Add(index);// if yes then add the index to numbers list so that the element at that position is not considered again
+                                    flag = 1;// set flag to 1
+                                }// end of if for comparision of the numbers in 2 arrays
+                                break;
+                            }// end of if for numbers list in which indexes are added
+                            index++;
+                        }// end of j loop for arr
+
+
+                        if (flag == 0) // check for the remaining elements of brr for which no match was found or frequency dint match. flag will be 0 for them
+
+                        {
+                            missing_num[counter] = brr[i];// add those number to missing_num array
+                            counter++;// increment counter to add next number
+
+                        }// end of if for adding missing numbers
+
+                    }// end of i loop for brr
+                     // to remove duplicate values of missing numbers
+                    int[] freq = new int[missing_num.Length];
+                    int k;
+                    for (k = 0; k < missing_num.Length; k++)
+                    {
+                        freq[k] = -1;// Set frequency to -1
+
+                    }
+                    // to check if the number is repeated in the array and set frequency to 0
+                    for (k = 0; k < missing_num.Length; k++)
+                    {
+                        int count = 1;
+                        for (int p = k + 1; p < missing_num.Length; p++)
+                        {
+                            if (missing_num[k] == missing_num[p]) // To check if the number occurs again in the array
+                            {
+                                count = count + 1;
+                                freq[p] = 0; // Set freq to 0 if the number is found again
+
+                            }// end of if for comparing numbers and set freq to 0 if the number is found again
+
+                        }// end of for loop 
+
+                    } // end of for loop
+
+                    // load unique numbers only
+                    for (k = 0; k < missing_num.Length; k++)//start of for loop for unique numbers
+                    {
+                        if (freq[k] != 0) // check for unique numbers
+                        {
+                            unq_num.Add(missing_num[k]);// add the numbers to the lsit unq_num
+
+                        }// end of if got adding unique numbers
+                    }//end of for loop for unique numbers
+                    return unq_num.ToArray(); // change list to array
+                }
+                else // if the difference between max and min numbers of the array brr is > 100 then display below message to the user
+                {
+                    Console.WriteLine("Differnce between Maximum and Minimun numbers in the array is " + Diff + " which is greater than 100. Please enter elemnets having difference less that 100");
+                } // end of else for differnce > 100
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception occured while computing computeFrequency():" + e.Message);
+            }
+            return new int[] { };
+        }
 
 
         //// Complete the gradingStudents function below.
