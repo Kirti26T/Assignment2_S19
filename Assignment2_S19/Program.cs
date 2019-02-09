@@ -32,46 +32,16 @@ namespace Assignment2_S19
             Console.WriteLine(maximumToys(prices, k));
             // Balanced sums
             Console.WriteLine("\n\nBalanced sums");
-            //List<int> arr = new List<int> { 1, 2, 2, 3 };
-            List<int> arr = new List<int>();
-            try
-            {
-                // Allow user to provide the size of array
-                Console.WriteLine("Enter Size of Array");
-                int size = Convert.ToInt32(Console.ReadLine());
-                int[] arry = new int[size];
-                // Allow user to input numbers for the array based on the given size
-                Console.WriteLine("Input Array Values");
-                for (int i = 0; i < arry.Length; i++)
-                {
-                    arry[i] = Convert.ToInt32(Console.ReadLine());
-
-                }
-                Console.WriteLine("arr = [" + string.Join(",", arry) + "]");
-                arr.AddRange(arry);
-                Console.WriteLine(balancedSums(arr));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception occured while computing computeFrequency():" + e.Message);
-            }
+            List<int> arr = new List<int> { 1, 2, 3 };
+            Console.WriteLine(balancedSums(arr));
 
             // Missing numbers
             Console.WriteLine("\n\nMissing numbers");
             int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206 };
             int[] brr = { 203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204 };
-            // Ask user to enter size of the array brr
-            Console.WriteLine("Enter Size of Array brr");
-            int brr_size = Convert.ToInt32(Console.ReadLine());
-            brr = new int[brr_size];
-            // Ask user to enter size of the array arr
-            Console.WriteLine("Enter Size of Array arr");
-            int arr_size = Convert.ToInt32(Console.ReadLine());
-            arr1 = new int[arr_size];
-
             int[] r2 = missingNumbers(arr1, brr);
-
             displayArray(r2);
+
             // grading students
             Console.WriteLine("\n\nGrading students");
             int[] grades = { 73, 67, 38, 33 };
@@ -106,7 +76,7 @@ namespace Assignment2_S19
                 Console.Write(n + " ");
             }
         }
-        // bubblesort method to sort the arrays
+        // bubblesort method to sort the arrays which is called in other methods for sorting
         static void bubblesort(int[] bs_arr)
         {
             for (int i = 0; i < bs_arr.Length - 1; i++)
@@ -209,60 +179,65 @@ namespace Assignment2_S19
             } // end catch
             return 0;
         }
-        
+
 
         // Complete the balancedSums function below.
         static string balancedSums(List<int> arr)
         {
-
-            int count = 0;
-            int n = arr.Count - 1;
+            try
             {
+                int count = 0;
+                int n = arr.Count - 1;
                 if (n >= 1)
-                {
-                    for (int i = 0; i <= n; i++)
                     {
-
-                        int sum1 = 0;
-                        int sum2 = 0;
-                        // Based on the index get the sum of the left elemnts of the array
-                        for (int j = 0; j < i; j++)
+                        for (int i = 0; i <= n; i++)
                         {
-                            sum1 += arr[j];
 
-                        }//end of for loop to calculate sum of left elements
-                        // Based on the index get the sum of the right elemnts of the array
-                        for (int k = i + 1; k <= n; k++)
-                        {
-                            sum2 += arr[k];
+                            int sum1 = 0;
+                            int sum2 = 0;
+                            // Based on the index get the sum of the left elemnts of the array
+                            for (int j = 0; j < i; j++)
+                            {
+                                sum1 += arr[j];
 
-                        }//end of for loop to calculate sum of right elements
-                         // Compare sum of both the sides derived above
-                        if (sum1 == sum2)
+                            }//end of for loop to calculate sum of left elements
+                             // Based on the index get the sum of the right elemnts of the array
+                            for (int k = i + 1; k <= n; k++)
+                            {
+                                sum2 += arr[k];
+
+                            }//end of for loop to calculate sum of right elements
+                             // Compare sum of both the sides derived above
+                            if (sum1 == sum2)
+                            {
+                                count++; // Increment count by 1 if the sum matches
+                            }
+                        }//end of for loop for which calculates sum and compares
+                         // If count >0 then return "YES" else "NO" to show if the element is found or not.
+                        if (count != 0)
                         {
-                            count++; // Increment count by 1 if the sum matches
+                            return "YES";
                         }
-                    }//end of for loop for which calculates sum and compares
-                    // If count >0 then return "YES" else "NO" to show if the element is found or not.
-                    if (count != 0)
-                    {
-                        return "YES";
+                        else
+                        {
+                            return "NO";
+                        }
                     }
+
                     else
                     {
-                        return "NO";
+                        Console.WriteLine("Enter more than one element in the array");
+
                     }
-                }
 
-                else
-                {
-                    Console.WriteLine("Enter more than one element in the array");
 
-                }
-                return "";
+                }//end of if which checks elements in array
 
-            }//end of if which checks elements in array
-
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception occured while computing BalancedSum():" + e.Message);
+            }
+            return "";
 
         }
 
@@ -271,17 +246,11 @@ namespace Assignment2_S19
         {
             try
             {
-                // Allow user to input numbers for the array brr based on the given size
-                Console.WriteLine("Input Array Values");
-                for (int b = 0; b < brr.Length; b++)
-                {
-                    brr[b] = Convert.ToInt32(Console.ReadLine());
-
-                }
-                Console.WriteLine("brr = {" + string.Join(",", brr) + "}");
                 bubblesort(brr);// Sort array brr by calling bubble sort method
+                bubblesort(arr);// Sort array arr by calling bubble sort method
                 int b_len = brr.Length; //get length of the array brr
-                                        // check difference between maximum and minimum numbers of the array
+                int a_len = arr.Length;// get length of array arr
+                // check difference between maximum and minimum numbers of the array
                 int minnum = brr[0];
                 int maxnum = brr[b_len - 1];
                 int Diff = maxnum - minnum;
@@ -290,17 +259,7 @@ namespace Assignment2_S19
                 if (Diff < 101)
                 {
 
-                    //Allow user to input numbers for the array arr based on the given size
-                    Console.WriteLine("Input Array Values");
-                    for (int a = 0; a < arr.Length; a++)
-                    {
-                        arr[a] = Convert.ToInt32(Console.ReadLine());
 
-                    }
-                    Console.WriteLine("arr = {" + string.Join(",", arr) + "}");
-                    bubblesort(arr);// Sort array arr by calling bubble sort method
-
-                    int a_len = arr.Length;// get length of array arr
                     List<int> numbers = new List<int>(); // create list for storing indexes for the numbers which are available in arr and brr
                     List<int> unq_num = new List<int>(); // create list for storing unique number
                     int[] missing_num = new int[b_len - a_len]; // array to store missing numbers
@@ -381,7 +340,7 @@ namespace Assignment2_S19
 
             catch (Exception e)
             {
-                Console.WriteLine("Exception occured while computing computeFrequency():" + e.Message);
+                Console.WriteLine("Exception occured while computing missingnumbers():" + e.Message);
             }
             return new int[] { };
         }
@@ -419,36 +378,9 @@ namespace Assignment2_S19
                 if (arr.Length > 0)
                 {
                     /*--------------Step 1: sort array -----------------*/
-                    // declare mid as middle element in the sorted array
-                    int mid;
-                    // declare min_position , temp
-                    int min_position, temp;
-
-                    for (int i = 0; i < arr.Length; i++)
-                    {
-                        // initialize the min_position to the current index of array
-                        min_position = i;
-                        // check to see if the next element is smaller
-                        for (int x = i + 1; x < arr.Length; x++)
-                        {
-                            // If the next element from the current min_position is smaller
-                            if (arr[x] < arr[min_position])
-                            {
-                                //assign new min_position 
-                                min_position = x;
-                            }
-                        } // End of inner for loop
-
-                        // If the min_position does not equal the current element, swap
-                        if (min_position != i)
-                        {
-                            temp = arr[i];
-                            arr[i] = arr[min_position];
-                            arr[min_position] = temp;
-                        }
-                    } // End of outer for loop
-
-                    // array is already sorted up to here 
+                    bubblesort(arr);
+                   // declare mid as middle element in the sorted array
+                   int mid;
 
                     /*--------------Step 2: find the middle element in the sorted array -----------------*/
                     // return middle element in the sorted array as result 
@@ -477,35 +409,7 @@ namespace Assignment2_S19
                 if (arr.Length > 0)
                 {
                     /*--------------Step 1: sort array -----------------*/
-                    // declare min_position , temp
-                    int min_position, temp;
-
-                    for (int i = 0; i < arr.Length; i++)
-                    {
-                        // initialize the min_position to the current index of array
-                        min_position = i;
-                        // check to see if the next element is smaller
-                        for (int x = i + 1; x < arr.Length; x++)
-                        {
-                            // If the next element from the current min_position is smaller
-                            if (arr[x] < arr[min_position])
-                            {
-                                //assign new min_position 
-                                min_position = x;
-                            }
-                        } // End of inner for loop
-
-                        // If the min_position does not equal the current element, swap
-                        if (min_position != i)
-                        {
-                            temp = arr[i];
-                            arr[i] = arr[min_position];
-                            arr[min_position] = temp;
-                        }
-                    } // End of outer for loop
-
-                    // array is already sorted up to here 
-
+                    bubblesort(arr);
                     /*--------------Step 2: find the closest numbers-----------------*/
                     // declare a list to hold result sets
                     var result = new List<int> { };
