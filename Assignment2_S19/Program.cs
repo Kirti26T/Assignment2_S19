@@ -100,7 +100,7 @@ namespace Assignment2_S19
             foreach(int n in arr) {
                 Console.Write(n + " ");
             }
-        } // end displayArray
+        } //end displayArray
 
         // bubblesort method to sort the arrays
         static void bubblesort(int[] bs_arr)
