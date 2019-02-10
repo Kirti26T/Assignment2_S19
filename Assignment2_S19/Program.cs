@@ -37,7 +37,7 @@ namespace Assignment2_S19
 
             // Balanced sums
             Console.WriteLine("\n\nBalanced sums");
-            List<int> arr = new List<int> { 2,0,0,0 };
+            List<int> arr = new List<int> { 1,2,3 };
             Console.WriteLine(balancedSums(arr));
             Console.WriteLine("------------------------------------------------");
 
