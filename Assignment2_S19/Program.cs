@@ -22,7 +22,7 @@ namespace Assignment2_S19
             // left rotation
             Console.WriteLine("Left Rotation");
             int d = 4;
-            int[] a = { 1, 2, 3, 10, 5, 6, 7 };
+            int[] a = { 1, 2, 3, 4, 5 };
             int[] r = rotLeft(a, d);
             displayArray(r);
             Console.WriteLine();
@@ -37,14 +37,12 @@ namespace Assignment2_S19
 
             // Balanced sums
             Console.WriteLine("\n\nBalanced sums");
-            List<int> arr = new List<int> { 1,2,3 };
+            List<int> arr = new List<int> { 1, 2, 3 };
             Console.WriteLine(balancedSums(arr));
             Console.WriteLine("------------------------------------------------");
 
             // Missing numbers
             Console.WriteLine("\n\nMissing numbers");
-            //int[] arr1 = { 7, 2, 5, 3, 5, 3 };
-            //int[] brr  = { 7, 2, 5, 4, 6, 3, 5, 3 };
             int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206 };
             int[] brr = { 203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204 };
             int[] r2 = missingNumbers(arr1, brr);
@@ -62,14 +60,14 @@ namespace Assignment2_S19
 
             // find the median
             Console.WriteLine("\n\nFind the median");
-            int[] arr2 = { 0, 1, 2, 4, 6, 5, 3, 8, 7 };
+            int[] arr2 = { 0, 1, 2, 4, 6, 5, 3 };
             Console.WriteLine(findMedian(arr2));
             Console.WriteLine("------------------------------------------------");
 
             // closest numbers
             Console.WriteLine("\n\nClosest numbers");
-            int[] arr3 = { -20, -3916237, -357920, -3620601, 7374819, -7330761, 30, 6246457, -6461594, 266854, -520, -470 };
-            //int[] arr3 = { 5, 4, 3, 2};
+            //int[] arr3 = { -20, -3916237, -357920, -3620601, 7374819, -7330761, 30, 6246457, -6461594, 266854, -520, -470 };
+            int[] arr3 = { 5, 4, 3, 2};
             int[] r4 = closestNumbers(arr3);
             displayArray(r4);
             Console.WriteLine();
@@ -77,7 +75,7 @@ namespace Assignment2_S19
 
             // Day of programmer
             Console.WriteLine("\n\nDay of Programmer");
-            int year = 2016;
+            int year = 2017;
             Console.WriteLine(dayOfProgrammer(year));
             Console.ReadLine();
 
@@ -165,26 +163,31 @@ namespace Assignment2_S19
         {
             try
             {
+
                 //printing the original array
+                /*
                 Console.WriteLine("Here is the array that will be used to execute bubble sort algorithm:");
                 for (int i = 0; i < prices.Length; i++)
                 {
                     Console.Write(" " + prices[i]);
+                    
                 }
+                
                 Console.WriteLine(" ");
                 Console.WriteLine("Here is the array after the execution of bubble sort algoritm:");
+                */
 
                 //calling the method for sorting
                 bubblesort(prices);
-                //Array.Sort(prices);
-
+                
+                /*
                 //printing the array after bubble sort
                 for (int i = 0; i < prices.Length; i++)
                 {
                     Console.Write(" " + prices[i]);
                 }
                 Console.WriteLine(" ");
-
+                */
                 // check for valid inputs
                 if (k > 0 && prices.Length > 0)
                 {
@@ -202,7 +205,7 @@ namespace Assignment2_S19
                         } // end if
                     } // end for
                     // Display result
-                    Console.WriteLine("The maximum toys that can be bought are:");
+                    //Console.WriteLine("The maximum toys that can be bought are:");
                     return count;
                 } // end if
                 else // display error message if invalid inputs
@@ -380,9 +383,9 @@ namespace Assignment2_S19
                     Console.WriteLine("Differnce between Maximum and Minimun numbers in the array is " + Diff + " which is greater than 100. Please enter elemnets having difference less than or equal to 100");
                 } // end of else for differnce > 100
             } // end try
-            catch (Exception e)
+            catch 
             {
-                Console.WriteLine("Exception occured while computing computeFrequency():" + e.Message);
+                Console.WriteLine("Exception occured while computing missingnumbers() !" );
             } // end catch
             // return default result
             return new int[] { };
