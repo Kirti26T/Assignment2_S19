@@ -399,19 +399,43 @@ namespace Assignment2_S19
                 // check for valid input, then apply logic
                 if (grades.Length > 0)
                 {
-                    // loop through array 
-                    for (int j = 0; j < grades.Length; j++)
+                    int flag = 0;
+
+                    // if any value in the array is not within the range of 0 - 100 (both inclusive) then set the flag to 1
+                    for (int i = 0; i < grades.Length; i++)
                     {
-                        //If the difference between the grade and the next multiple of 5 is less than 3, round grade up to the next multiple of 5.
-                        //Otherwise If grade less than 38, no rounding occurs 
-                        if (grades[j] >= 38 && grades[j] % 5 > 2)
+                        if (grades[i] < 0 || grades[i] > 100)
                         {
-                            grades[j] += 5 - grades[j] % 5; //round grade up to the next multiple of 5.
-                        } // end if
-                    } // end for
-                      // return grades as  result
-                    return grades;
-                } // end if
+
+                            flag = 1; // set flag to 1
+                        }
+                    }
+                    // if the flag is 0 the execute the below loop
+                    if (flag == 0)
+                    {
+                        // loop through array 
+                        for (int j = 0; j < grades.Length; j++)
+                        {
+
+                            //If the difference between the grade and the next multiple of 5 is less than 3, round grade up to the next multiple of 5.
+                            //Otherwise If grade less than 38, no rounding occurs 
+                            if (grades[j] >= 38 && grades[j] % 5 > 2)
+                            {
+                                grades[j] += 5 - grades[j] % 5; //round grade up to the next multiple of 5.
+                            } // end if
+
+                        } // end for
+                        return grades;
+                    }// end if for checking flag
+                     // below statement will be executed if any one of the elements in the array is not satisfying the range conditions
+                    else
+                    {
+                        Console.Write("Some Values in the array are not in between 0 & 100.Please enter valid input !!!");
+                    }
+
+                    // return grades as  result
+
+                }// end if
                 else
                 {
                     Console.WriteLine("Please provide a valid input !!!");
